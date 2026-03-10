@@ -6,6 +6,16 @@ struct PhanSo
     int x;
     int y;
 };
+void Nhap(PhanSo &a)
+{
+    cin>>a.x;
+    cin>>a.y;
+    while(a.y==0)
+    {
+        cin>>a.x;
+        cin>>a.y;
+    }
+}
 int UCLN(int a, int b)
 {
     a=abs(a);
@@ -93,17 +103,28 @@ PhanSo Chia (PhanSo a, PhanSo b)
     return kq;
 
 }
+PhanSo Max( PhanSo a,PhanSo b)
+{
+    PhanSo kq=Tru(a,b);
+    if(kq.x<0)
+        return b;
+    else if(kq.x==0)
+        cout<<"bằng nhau"<<endl;
+    else
+        return a;
+
+
+}
 int main()
 {
     PhanSo a,b;
-    cin>>a.x;
-    cin>>a.y;
-    cin>>b.x;
-    cin>>b.y;
+    Nhap(a);
+    Nhap(b);
 
-in(Cong(a,b));
-in(Tru(a,b));
-in(Nhan(a,b));
-in(Chia(a,b));
+    in(Cong(a,b));
+    in(Tru(a,b));
+    in(Nhan(a,b));
+    in(Chia(a,b));
+    in(Max(a,b));
     return 0;
 }
