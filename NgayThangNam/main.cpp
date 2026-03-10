@@ -1,130 +1,74 @@
-#include <iostream>
-
+#include<iostream>
 using namespace std;
-struct PhanSo
+struct Date
 {
-    int x;
-    int y;
+    int day,month,year;
 };
-void Nhap(PhanSo &a)
+
+int Add(Date a)
 {
-    cin>>a.x;
-    cin>>a.y;
-    while(a.y==0)
+    Date x=a;
+    x.day++;
+    switch(x.month)
     {
-        cin>>a.x;
-        cin>>a.y;
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        if(x.day>31)
+        {
+            x.month++;
+            x.day=1;
+        }
+        if(x.month>12)
+        {
+            x.month=1;
+            x.year++;
+        }
+        break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        if(x.day>30)
+        {
+            x.month++;
+            x.day=1;
+        }
+        break;
+    case 2:
+        if(x.year%400==0)
+        {
+            if(x.day>29)
+            {
+                x.month++;
+                x.day=1;
+            }
+        }
+        else
+        {
+            if(x.day>28)
+            {
+                x.month++;
+                x.day=1;
+            }
+        }
+        break;
     }
-}
-int UCLN(int a, int b)
-{
-    a=abs(a);
-    b=abs(b);
-    if (b==0 )
-        return a;
-    return UCLN(b,a%b);
+    return x.day;
 
-}
-void in(PhanSo a)
-{
-    cout<<a.x;
-    cout<<"/";
-    cout<<a.y;
-    cout<<" ";
-}
-void rutgon(PhanSo& a)
-{
-    int kq;
-    if (a.x<0 &&a.y<0)
-    {
-        a.x=abs(a.x);
-        a.y=abs(a.y);
-        kq=UCLN(a.x,a.y);
-        a.x=a.x/kq;
-        a.y=a.y/kq;
-    }
 
-    else if(a.x<0)
-    {
-        a.x=abs(a.x);
-        kq=UCLN(a.x,a.y);
-        a.x=-a.x/kq;
-        a.y=a.y/kq;
+
+
 
     }
-    else if(a.y<0)
-    {
-        a.y=abs(a.y);
-        kq=UCLN(a.x,a.y);
-        a.x=-a.x/kq;
-        a.y=a.y/kq;
-
-    }
-    else
-    {
-        kq=UCLN(a.x,a.y);
-        a.x=a.x/kq;
-        a.y=a.y/kq;
-    }
-
-}
-PhanSo Cong(PhanSo a, PhanSo b)
-{
-    PhanSo kq;
-    kq.y=a.y*b.y;
-    kq.x=(a.x*b.y)+(b.x*a.y);
-    rutgon(kq);
-    return kq;
-}
-PhanSo Tru(PhanSo a, PhanSo b)
-{
-    PhanSo kq;
-    kq.y=a.y*b.y;
-    kq.x=(a.x*b.y)-(b.x*a.y);
-    rutgon(kq);
-
-    return kq;
-}
-PhanSo Nhan(PhanSo a, PhanSo b)
-{
-    PhanSo kq;
-    kq.y=a.y*b.y;
-    kq.x=a.x*b.x;
-    rutgon(kq);
-    return kq;
-
-}
-PhanSo Chia (PhanSo a, PhanSo b)
-{
-    PhanSo kq;
-    kq.y=a.y*b.x;
-    kq.x=a.x*b.y;
-    rutgon(kq);
-    return kq;
-
-}
-PhanSo Max( PhanSo a,PhanSo b)
-{
-    PhanSo kq=Tru(a,b);
-    if(kq.x<0)
-        return b;
-    else if(kq.x==0)
-        cout<<"bằng nhau"<<endl;
-    else
-        return a;
-
-
-}
 int main()
 {
-    PhanSo a,b;
-    Nhap(a);
-    Nhap(b);
-
-    in(Cong(a,b));
-    in(Tru(a,b));
-    in(Nhan(a,b));
-    in(Chia(a,b));
-    in(Max(a,b));
+    Date a;
+    cin>>a.day>>a.month>>a.year;
+    cout<<Add(a);
     return 0;
 }
